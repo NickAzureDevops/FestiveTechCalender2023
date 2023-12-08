@@ -6,5 +6,6 @@ We will be guiding you through the process of setting up a private chatbot using
 
 We hope you enjoy this demo as much as we enjoyed wrapping it up for you. May your festive season be filled with joy, laughter, and lots of coding!
 
+![logo](./image/festivetechimage.jpg)
 
 ![logo](./image/logo.jpg)
