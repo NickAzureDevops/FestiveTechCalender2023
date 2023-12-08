@@ -1,0 +1,9 @@
+---
+# OpenAI models to be deployed to cognitive services.
+# Model name also represents deployment name for simplicity.
+- name: gpt-35-turbo
+  version: '0301'
+- name: text-davinci-002
+  version: 1
+- name: text-davinci-003
+  version: 1
