@@ -1,5 +1,10 @@
-# FestiveTechCalender2023
+# FestiveTechCalendar2023
 
-This is a repository for the Festive Tech Calendar 2023 from myself and Kevin Greene. It will contain the code and prequisites required to set up your own private chatgpt using Azure OpenAI Service. 
+Welcome to the Festive Tech Calendar 2023! This special Christmas gift from myself and Kevin Greene is a repository filled with code and prerequisites required to set up your very own private chatbot using Azure OpenAI Service. 
+
+We will be guiding you through the process of setting up a private chatbot using this app as a template: https://github.com/mckaywrigley/chatbot-ui. 
+
+We hope you enjoy this demo as much as we enjoyed wrapping it up for you. May your festive season be filled with joy, laughter, and lots of coding!
+
 
 ![logo](./image/logo.jpg)
