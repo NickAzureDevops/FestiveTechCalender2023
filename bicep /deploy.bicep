@@ -40,14 +40,3 @@ module vault 'modules/keyvault.bicep' = {
     serviceConnectionObjectId: 'd826693e-57ba-4627-994c-d7380281fd7b'
   }
 }
-module containerApps 'modules/containerapps.bicep' = {
-  scope: resourceGroup
-  name: '${uniqueString(deployment().name, location)}-containerapps'
-  params: {
-    name: 'container-${prefix}-${environment}-${project}-${suffix}'
-    location: location
-    tags: tags
-    openaiEndpoint: openai.outputs.endpoint
-    vaultName: vault.outputs.vaultName
-  }
-}
