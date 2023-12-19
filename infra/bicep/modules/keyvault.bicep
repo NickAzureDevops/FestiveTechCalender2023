@@ -2,7 +2,6 @@ param name string
 param location string = resourceGroup().location
 param tags object = {}
 param createMode string = 'default'
-param serviceConnectionObjectId string
 param cognitiveServiceName string
 param softDeleteRetentionInDays int = 90
 @allowed([
@@ -23,15 +22,6 @@ resource vault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   properties: {
     createMode: createMode
     accessPolicies: [
-      {
-        objectId: serviceConnectionObjectId
-        permissions: {
-          secrets: [
-            'all'
-          ]
-        }
-        tenantId: subscription().tenantId
-      }
     ]
     enableRbacAuthorization: false
     enableSoftDelete: true
