@@ -1,6 +1,6 @@
 param environment string = 'dev'
 param project string = 'privatechatbot'
-param location string = 'westeurope'
+param location string = resourceGroup().location
 param suffix string = '01'
 param tags object = {
   project: 'festivetechcalender'
@@ -9,11 +9,12 @@ param tags object = {
 }
 
 @description('The name of the virtual network link')
-param openAIVirtualNetworkLinkName string = '${uniqueString(resourceGroup().id)}-virtualnetworklink'
-param openAIPrivateEndpointName string = '${uniqueString(resourceGroup().id)}-openai-privateendpoint'
+param openAIVirtualNetworkLinkName string = 'festivetechcalender-virtualnetworklink'
+param openAIPrivateEndpointName string = 'openai-privateendpoint'
+
+param openAIName string = 'privatechatbot-openai'
 
 
-var vnetName = 'chatgptvnet01'
 var subnetName = 'chatgpt-subnet'
 var cogSearchPepSubnetName = 'cogpesubnet'
 var openAIPepSubnetName = 'openai-pep-subnet'
@@ -23,9 +24,9 @@ module vnet 'modules/vnet.bicep' = {
   params: {
     vnetName: 'vnet-${environment}-${project}-${suffix}'
     location: location
-    subnetName: subnetName
-    pepSubnetName: cogSearchPepSubnetName
-    openAIPepSubnetName: openAIPepSubnetName
+    subnetname: subnetName
+    pepsubnetname: cogSearchPepSubnetName
+    openAIPepsubnetname: openAIPepSubnetName
   }
 }
 
@@ -41,7 +42,7 @@ module vault 'modules/keyvault.bicep' = {
 
 
 module openai 'modules/openai.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-openai'
+  name: openAIName
   params: {
     name: 'openai-${environment}-${project}-${suffix}'
     location: location
@@ -56,7 +57,8 @@ module openAIPrivateEndpoint 'modules/openai_private_endpoint.bicep' = {
     location: location
     privateEndpointOpenAIName: openAIPrivateEndpointName
     openAISubnetName: openAIPepSubnetName
-    vnetName: vnetName
+    vnetName: vnet.outputs.vnetname
     virtualNetworkId: openAIVirtualNetworkLinkName
   }
 }
+

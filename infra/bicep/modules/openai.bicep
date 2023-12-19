@@ -8,7 +8,7 @@ param tags object = {}
 param sku string = 'S0'
 
 
-resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-12-01' = {
+resource openAI 'Microsoft.CognitiveServices/accounts@2022-03-01' = {
   name: name
   location: location
   tags: tags
@@ -24,6 +24,6 @@ resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-12-01' = {
   }
 
 
-output cognitiveServiceName string = cognitiveService.name
-output cognitiveServiceId string = cognitiveService.id
-output cognitiveServiceEndpoint string = cognitiveService.properties.endpoint
+output cognitiveServiceName string = openAI.name
+output cognitiveServiceId string = openAI.id
+output cognitiveServiceEndpoint string = openAI.properties.endpoint

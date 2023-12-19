@@ -1,11 +1,11 @@
-param name string
+param privateEndpointOpenAIName string
 param location string
 param openAISubnetName string
 param vnetName string
 param virtualNetworkId string
-param privateEndpointOpenAIName string
+param name string
 
-resource cognitiveService 'Microsoft.CognitiveServices/accounts@2022-03-01' existing = {
+resource openAI 'Microsoft.CognitiveServices/accounts@2022-03-01' existing = {
   name: name
 }
 
@@ -34,7 +34,7 @@ resource dnsZones 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 }
 
 resource privateEndpointOpenAi 'Microsoft.Network/privateEndpoints@2023-04-01' = {
-location: location
+  location: location
   name: privateEndpointOpenAIName
   properties: {
     subnet: {
@@ -45,7 +45,7 @@ location: location
       {
         name: privateEndpointOpenAIName
         properties: {
-          privateLinkServiceId: cognitiveService.id
+          privateLinkServiceId: openAI.id
           groupIds: ['account']
         }
       }
@@ -53,7 +53,6 @@ location: location
   }
   tags: {}
   dependsOn: [dnsZones]
-
 
   resource dnsZoneGroupOpenAi 'privateDnsZoneGroups' = {
     name: '${privateEndpointOpenAIName}-default'

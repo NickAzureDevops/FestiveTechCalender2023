@@ -1,10 +1,7 @@
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-
 param location string
-param subnetName string
-param pepSubnetName string
-param openAIPepSubnetName string
+param subnetname string
+param pepsubnetname string
+param openAIPepsubnetname string
 param vnetName string
 
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
@@ -16,7 +13,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
     }
     subnets: [
       {
-        name: subnetName
+        name: subnetname
         properties: {
           serviceEndpoints: [
             {
@@ -38,7 +35,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
         }
       }
       {
-        name: pepSubnetName
+        name: pepsubnetname
         properties: {
           addressPrefix: '10.0.1.0/24'
           privateEndpointNetworkPolicies: 'Disabled'
@@ -46,7 +43,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
         }
       }
       {
-        name: openAIPepSubnetName
+        name: openAIPepsubnetname
         properties: {
           addressPrefix: '10.0.2.0/24'
           privateEndpointNetworkPolicies: 'Disabled'
@@ -56,3 +53,5 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
     ]
   }
 }
+
+output vnetname string = vnet.name
