@@ -1,5 +1,0 @@
----
-# OpenAI models to be deployed to cognitive services.
-# Model name also represents deployment name for simplicity.
-- name: text-davinci-003
-  version: 1

@@ -4,6 +4,7 @@ param openAISubnetName string
 param vnetName string
 param virtualNetworkId string
 param name string
+param tags object
 
 resource openAI 'Microsoft.CognitiveServices/accounts@2022-03-01' existing = {
   name: name
@@ -19,7 +20,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' existing = {
 resource dnsZones 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: 'privatelink.openai.azure.com'
   location: 'global'
-  tags: {}
+  tags: tags
   properties: {}
   resource virtualNetworkLink 'virtualNetworkLinks' = {
     name: virtualNetworkId
@@ -51,7 +52,7 @@ resource privateEndpointOpenAi 'Microsoft.Network/privateEndpoints@2023-04-01' =
       }
     ]
   }
-  tags: {}
+  tags: tags
   dependsOn: [dnsZones]
 
   resource dnsZoneGroupOpenAi 'privateDnsZoneGroups' = {

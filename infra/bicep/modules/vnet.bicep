@@ -1,12 +1,13 @@
 param location string
 param subnetname string
-param pepsubnetname string
 param openAIPepsubnetname string
 param vnetName string
+param tags object
 
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: vnetName
   location: location
+  tags: tags
   properties: {
     addressSpace: {
       addressPrefixes: ['10.0.0.0/16']
@@ -32,14 +33,6 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
             }
           ]
           addressPrefix: '10.0.0.0/24'
-        }
-      }
-      {
-        name: pepsubnetname
-        properties: {
-          addressPrefix: '10.0.1.0/24'
-          privateEndpointNetworkPolicies: 'Disabled'
-          privateLinkServiceNetworkPolicies: 'Enabled'
         }
       }
       {
